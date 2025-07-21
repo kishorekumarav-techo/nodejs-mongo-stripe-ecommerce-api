@@ -61,8 +61,10 @@ const OrderController = {
 
     /* get user's orders */
     async get_order(req, res) {
+        let orders;
         try {
-            const orders = await Order.findOne({ userId: req.params.userId });
+            const userId = new ObjectId(req.params.userId);
+            orders = await Order.findOne({ userId: { $eq: userId } });
             if (!orders) {
                 res.status(404).json({
                     type: "error",
