@@ -22,7 +22,7 @@ const CartController = {
     /* get user cart */
     async get_cart(req, res) {
         try {
-            const cart = await Cart.findOne({ userId: req.params.userId});
+            const cart = await Cart.findSafe({ userId: req.params.userId});
             if (!cart) {
                 res.status(404).json({
                     type: "error",
