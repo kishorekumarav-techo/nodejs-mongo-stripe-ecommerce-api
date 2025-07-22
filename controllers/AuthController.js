@@ -34,7 +34,7 @@ const AuthController = {
     /* login existing user */
     async login_user(req, res) {
         
-        const user = await User.findSafe({ username: req.body.username });
+        const user = await User.findOne({ username: req.body.username });
 
         if (!user || !bcrypt.compareSync(req.body.password, user.password)) {
             res.status(500).json({
